@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Korada Purna Sai | Portfolio</title>
+  <meta name="description" content="Portfolio of Korada Purna Sai - Cybersecurity Professional">
+  <!-- Google Fonts: Poppins for body, Playfair Display for headings -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">Korada Purna Sai</h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- Theme toggle button -->
+      <div class="theme-toggle" id="theme-toggle">🌙</div>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="profile-image">
+        <img src="assets/images/face.jpg" alt="Korada Purna Sai">
+      </div>
+      <h2 class="hero-title">Cybersecurity Professional</h2>
+      <p class="hero-description">Specializing in Penetration Testing, Vulnerability Assessment, and Ethical Hacking.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="about section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p>A highly motivated cybersecurity professional with hands-on experience in Capture the Flag (CTF) events, penetration testing, and ethical hacking. Selected by Cyberthreya through competitive CTF performance and currently undergoing advanced training in cybersecurity techniques.</p>
+    </div>
+  </section>
+  
+  <!-- Skills Section -->
+  <section id="skills" class="skills section">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      <ul class="skill-list">
+        <li><strong>Cybersecurity:</strong> Penetration testing, phishing simulations, vulnerability assessment.</li>
+        <li><strong>Tools:</strong> Kali Linux, Nmap, Metasploit, Wireshark, Burp Suite, Nessus.</li>
+        <li><strong>Programming:</strong> Python, HTML, CSS.</li>
+        <li><strong>Web Security:</strong> SQL injection, XSS, web application security analysis.</li>
+        <li><strong>Operating Systems:</strong> Linux (expert), Windows (expert).</li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Projects Section -->
+  <section id="projects" class="projects section">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Pomodoro Timer (Flutter)</h3>
+          <p>Developed a time management application featuring alarms, popup notifications, and a 4-round session system.</p>
+        </div>
+        <div class="project-card">
+          <h3>Security Using Color Code and Armstrong Number (Python)</h3>
+          <p>Built a security project utilizing color codes and Armstrong numbers for encryption and decryption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Experience Section -->
+  <section id="experience" class="experience section">
+    <div class="container">
+      <h2 class="section-title">Experience & Internships</h2>
+      <ul class="experience-list">
+        <li><strong>Cyberthreya (Intern):</strong> Gaining expertise in practical penetration testing, phishing, and internal network assessment techniques.</li>
+        <li><strong>Palo Alto Cybersecurity Internship:</strong> Collaborated on vulnerability assessment and security strategies.</li>
+        <li><strong>Nikist Hacker Mentorship Club:</strong> Participated in advanced cybersecurity training and ethical hacking simulations.</li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Certifications Section -->
+  <section id="certifications" class="certifications section">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+      <ul class="certification-list">
+        <li><strong>AWS Academy Graduate - Machine Learning Foundations</strong></li>
+        <li><strong>Hacker Mentorship Club Internship Certification (NIKIST)</strong></li>
+        <li><strong>CTF Events:</strong> Competed in multiple events demonstrating problem-solving and cybersecurity expertise.</li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Contact & Social Media Section -->
+  <footer id="contact" class="footer section">
+    <div class="container">
+      <h2 class="section-title">Contact Me</h2>
+      <p>Email: <a href="mailto:siddhukorda756@gmail.com">siddhukorda756@gmail.com</a></p>
+      <p>Phone: <a href="tel:+917780411816">+91 7780411816</a></p>
+      <!-- Social Media Icons -->
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/purna-sai-korada-b6a634293/" target="_blank">
+          <img src="assets/images/social-media-icons/linkedin.png" alt="LinkedIn">
+        </a>
+        <a href="https://github.com/Thondarock" target="_blank">
+          <img src="assets/images/social-media-icons/github.png" alt="GitHub">
+        </a>
+        <a href="https://twitter.com/" target="_blank">
+          <img src="assets/images/social-media-icons/twitter.png" alt="Twitter">
+        </a>
+        <a href="https://facebook.com/" target="_blank">
+          <img src="assets/images/social-media-icons/facebook.png" alt="Facebook">
+        </a>
+      </div>
+      <p>&copy; 2023 Korada Purna Sai. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript for Theme Toggle and Section Reveal -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      themeToggle.textContent = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+    });
+
+    // Reveal Sections on Scroll
+    // Selecting all elements with the class "section" ensures the footer is included.
+    const sections = document.querySelectorAll('.section');
+    const revealSection = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    const sectionObserver = new IntersectionObserver(revealSection, { threshold: 0.2 });
+    sections.forEach(section => sectionObserver.observe(section));
+  </script>
+</body>
+</html>
