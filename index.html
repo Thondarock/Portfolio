@@ -12,8 +12,9 @@
 <body>
   <!-- Navigation -->
   <header class="navbar">
-    <div class="container">
+    <div class="container nav-container">
       <h1 class="logo">Korada Purna Sai</h1>
+
       <nav>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -24,8 +25,16 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+
       <!-- Theme toggle button -->
       <div class="theme-toggle" id="theme-toggle">🌙</div>
+
+      <!-- Hamburger Menu for Mobile -->
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   </header>
   
@@ -37,7 +46,13 @@
       </div>
       <h2 class="hero-title">Cybersecurity Professional</h2>
       <p class="hero-description">Specializing in Penetration Testing, Vulnerability Assessment, and Ethical Hacking.</p>
-      <a href="#contact" class="btn">Get in Touch</a>
+      
+      <!-- Hero Buttons: Get in Touch & Download Resume -->
+      <div class="hero-buttons">
+        <a href="#contact" class="btn">Get in Touch</a>
+        <!-- Update the href below to match your actual resume file path -->
+        <a href="Purna Resume .pdf" class="btn resume-btn" download>Download Resume</a>
+      </div>
     </div>
   </section>
   
@@ -121,7 +136,7 @@
         <a href="https://x.com/Thonda420" target="_blank">
           <img src="twitter.png" alt="Twitter">
         </a>
-        <a href="https://www.facebook.com/siddhu.korada" target="_blank">
+        <a href="https://www.facebook.com/siddhu.korada/" target="_blank">
           <img src="facebook.png" alt="Facebook">
         </a>
       </div>
@@ -129,7 +144,7 @@
     </div>
   </footer>
   
-  <!-- JavaScript for Theme Toggle and Section Reveal -->
+  <!-- JavaScript for Theme Toggle, Section Reveal, and Hamburger Menu -->
   <script>
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
@@ -139,7 +154,6 @@
     });
 
     // Reveal Sections on Scroll
-    // Selecting all elements with the class "section" ensures the footer is included.
     const sections = document.querySelectorAll('.section');
     const revealSection = (entries, observer) => {
       entries.forEach(entry => {
@@ -151,6 +165,13 @@
     };
     const sectionObserver = new IntersectionObserver(revealSection, { threshold: 0.2 });
     sections.forEach(section => sectionObserver.observe(section));
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
   </script>
 </body>
 </html>
