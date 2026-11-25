@@ -256,7 +256,7 @@ function scrollAnimations() {
   gsap.to($$('.w', st), { opacity: 1, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: st, start: 'top 80%', end: 'bottom 45%', scrub: 0.6 } });
 
   // 3D card reveals
-  const reveal3d = '.role, .pbi, .stat, .pillar, .job, .flow__step, .case, .init, .skillset, .badge, .edu__item, .extra__item, .about__photo';
+  const reveal3d = '.detlib, .hire, .role, .pbi, .stat, .pillar, .job, .flow__step, .case, .init, .skillset, .badge, .edu__item, .extra__item, .about__photo';
   gsap.set(reveal3d, { opacity: 0 });
   ScrollTrigger.batch(reveal3d, {
     start: 'top 90%',

@@ -10,6 +10,8 @@ const COMMANDS = {
       ['whoami', 'who I am'],
       ['role', 'current role & level'],
       ['playbooks', 'SOAR automation I built'],
+      ['rules', 'analytic rules I built'],
+      ['contract', 'hire me for a project'],
       ['stack', 'security layers I work on'],
       ['skills', 'tools & platforms'],
       ['projects', 'GitHub projects'],
@@ -24,7 +26,7 @@ const COMMANDS = {
   ],
   whoami: () => [
     `${C('c', 'Korada Purna Sai')} · L2 SOC Analyst & SOC Engineer`,
-    'Visakhapatnam, India · Microsoft SC-200',
+    'Hyderabad, India · Microsoft SC-200 · open to remote',
     'I investigate incidents and engineer the automation, integrations and',
     'policies behind a modern Microsoft security stack.',
   ],
@@ -79,6 +81,15 @@ const COMMANDS = {
     a.click();
     return [`${C('c', '✓')} downloading Korada-Purna-Sai-Resume.pdf …`];
   },
+  contract: () => [
+    `${C('c', 'Available for contract projects')}: Microsoft Sentinel & Defender setup`,
+    '  connectors · analytic rules · SOAR playbooks · Defender/Intune policies · DLP · SPF/DKIM/DMARC',
+    `  → <a href="https://wa.me/917780411816?text=Hi%20Purna%2C%20I%27d%20like%20to%20discuss%20a%20Microsoft%20Sentinel%20%2F%20Defender%20project." target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:siddhukorda756@gmail.com?subject=Sentinel%20%2F%20Defender%20contract%20project">email a brief</a>`,
+  ],
+  rules: () => [
+    '30–40 Sentinel analytic rules, including:',
+    ...['PowerShell launched from Word / Office macros', 'Suspicious file changes & mass modification', 'Global Admin password resets', 'Forgot-password abuse', 'Unusual sign-ins & account misuse', 'Suspicious SMTP activity', 'Exchange inbox / mail-flow rule changes', 'Port-scan detection'].map((r) => `  ${C('c', '→')} ${r}`),
+  ],
   hire: () => [
     `${C('a', '[!]')} privilege escalation request detected…`,
     `${C('c', '[✓]')} request approved. Great choice.`,

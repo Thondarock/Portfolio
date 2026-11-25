@@ -493,6 +493,24 @@ a.init b { transition: color .3s; } a.init:hover b { color: var(--cyan); }
 .badge__verify[href="#"] { display: none; }
 .pb__intro .grad-text { font-weight: 700; }
 
+.detlib { margin-top: 18px; padding: clamp(22px, 3vw, 36px); display: grid; grid-template-columns: .8fr 2fr; gap: 28px; align-items: start; }
+.detlib__k { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.detlib h3 { font-size: clamp(26px, 2.8vw, 40px); line-height: 1.05; letter-spacing: -0.035em; }
+.detlib__list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; font-size: 13px; color: #c3cadb; }
+.detlib__list li { display: flex; gap: 10px; align-items: baseline; padding: 9px 0; border-bottom: 1px dashed var(--line-2); }
+.detlib__list b { flex: none; min-width: 74px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+.detlib__list li.more { color: var(--muted); border: 0; }
+.hire { margin-top: 56px; width: 100%; max-width: 1000px; text-align: left; padding: clamp(24px, 3.4vw, 44px); display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center; }
+.hire__k { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.hire h3 { font-size: clamp(26px, 3vw, 42px); line-height: 1.05; letter-spacing: -0.035em; margin-bottom: 12px; }
+.hire__copy > p { color: var(--muted); margin-bottom: 18px; }
+.hire__list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; font-size: 12.5px; color: #c3cadb; }
+.hire__list li::before { content: "▸ "; color: var(--cyan); }
+.hire__cta { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.hire__cta .btn { justify-content: center; }
+.hire__cta small { color: var(--muted); font-size: 11.5px; text-align: center; }
+@media (max-width: 900px) { .detlib, .hire { grid-template-columns: 1fr; } .detlib__list, .hire__list { grid-template-columns: 1fr; } }
+
 /* lab: closing card */
 .pcard--more { justify-content: center; align-items: flex-start; padding: 34px 28px; gap: 16px; background: radial-gradient(120% 90% at 100% 0%, rgba(139,92,255,.28), transparent 60%), radial-gradient(100% 80% at 0% 100%, rgba(60,240,210,.18), transparent 60%), linear-gradient(160deg, rgba(22,30,54,.7), rgba(9,13,25,.6)); }
 .pcard--more .mono { font-size: 12px; color: var(--cyan); letter-spacing: .14em; text-transform: uppercase; }

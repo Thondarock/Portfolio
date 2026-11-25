@@ -88,7 +88,7 @@
       <a href="#credentials">Credentials</a>
     </nav>
     <div class="nav__right">
-      <span class="nav__clock mono" title="Visakhapatnam, India (IST)"><i class="pulse"></i><span id="clock">--:--</span> IST</span>
+      <span class="nav__clock mono" title="Hyderabad, India (IST)"><i class="pulse"></i><span id="clock">--:--</span> IST</span>
       <a href="#contact" class="btn btn--sm btn--glow magnetic" data-cursor="Say hi">Let's talk</a>
       <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
@@ -132,7 +132,7 @@
           <div class="hero__meta reveal-fade">
             <div><span class="mono k">Currently</span><span>L2 SOC Analyst &amp; Engineer @ Auxilium</span></div>
             <div><span class="mono k">Certified</span><span>Microsoft SC-200</span></div>
-            <div><span class="mono k">Open to</span><span>Remote · any location</span></div>
+            <div><span class="mono k">Based in</span><span>Hyderabad · open to remote</span></div>
           </div>
         </div>
 
@@ -196,7 +196,7 @@
               <source srcset="assets/img/about.webp" type="image/webp">
               <img src="assets/img/about.jpg" alt="Korada Purna Sai, outdoors" loading="lazy" width="960" height="1200">
             </picture>
-            <figcaption class="mono">Off shift · Visakhapatnam</figcaption>
+            <figcaption class="mono">Off shift</figcaption>
           </figure>
 
           <div class="about__body">
@@ -270,6 +270,7 @@
             <div class="job__col">
               <h4 class="mono">02 / Detection Engineering &amp; SOPs</h4>
               <ul class="ticks">
+                <li>Built <b>30–40 Sentinel analytic rules</b> across identity, endpoint, email and Exchange (see the detection library below).</li>
                 <li>Tuned analytic rules, cutting <b>false positives by 30–40%</b>.</li>
                 <li>Identified and corrected flawed port-scan detection logic.</li>
                 <li>Created analytic rules for <b>Global Administrator password resets</b> and forgot-password abuse using audit logs.</li>
@@ -288,6 +289,24 @@
             </div>
           </div>
         </article>
+
+        <div class="detlib card3d">
+          <div class="detlib__head">
+            <p class="mono detlib__k">// detection library</p>
+            <h3><span class="grad-text">30–40</span> analytic rules I've built</h3>
+          </div>
+          <ul class="detlib__list mono">
+            <li><b>Endpoint</b>PowerShell launched from Word / Office macros</li>
+            <li><b>Endpoint</b>Suspicious file changes and mass file modification</li>
+            <li><b>Identity</b>Global Administrator password reset activity</li>
+            <li><b>Identity</b>Forgot-password method abuse (audit logs)</li>
+            <li><b>Identity</b>Unusual sign-ins and account misuse</li>
+            <li><b>Email</b>Suspicious SMTP activity</li>
+            <li><b>Exchange</b>Suspicious inbox and mail-flow rule changes</li>
+            <li><b>Network</b>Port-scan detection (logic rebuilt)</li>
+            <li class="more">+ many more across Sentinel &amp; Defender XDR</li>
+          </ul>
+        </div>
 
         <div class="flow" aria-label="Incident lifecycle">
           <div class="flow__step"><span class="mono">01</span><b>Detect</b><small>Analytics · watchlists</small></div>
@@ -592,6 +611,27 @@
           <a href="https://www.instagram.com/tr__siddhu_" target="_blank" rel="noopener" class="social magnetic" data-cursor="Instagram" aria-label="Instagram"><svg><use href="#i-instagram"/></svg></a>
         </div>
         <a href="assets/Korada-Purna-Sai-Resume.pdf" download class="btn btn--glow magnetic" data-cursor="PDF">Download résumé <svg><use href="#i-down"/></svg></a>
+
+        <div class="hire card3d" id="hire">
+          <div class="hire__copy">
+            <p class="mono hire__k"><span class="status-dot"></span> Available for contract projects</p>
+            <h3>Need Microsoft Sentinel &amp; Defender <em class="serif grad-text">set up right?</em></h3>
+            <p>I take on paid, timeline-based projects to deploy and harden the Microsoft security stack, from first log to automated response.</p>
+            <ul class="hire__list mono">
+              <li>Sentinel workspace, data connectors &amp; log ingestion</li>
+              <li>Analytic rules, watchlists &amp; tuning</li>
+              <li>SOAR playbooks: Jira, Teams, email, auto-close</li>
+              <li>Defender XDR, Endpoint &amp; Office 365 policies</li>
+              <li>Intune compliance &amp; Purview DLP / labeling</li>
+              <li>SPF, DKIM &amp; DMARC email authentication</li>
+            </ul>
+          </div>
+          <div class="hire__cta">
+            <a href="https://wa.me/917780411816?text=Hi%20Purna%2C%20I%27d%20like%20to%20discuss%20a%20Microsoft%20Sentinel%20%2F%20Defender%20project." target="_blank" rel="noopener" class="btn btn--glow magnetic" data-cursor="Chat"><svg><use href="#i-whatsapp"/></svg> WhatsApp me</a>
+            <a href="mailto:siddhukorda756@gmail.com?subject=Sentinel%20%2F%20Defender%20contract%20project" class="btn btn--ghost magnetic" data-cursor="Email"><svg><use href="#i-mail"/></svg> Email a brief</a>
+            <small class="mono">Share scope, timeline &amp; budget, and I'll reply with a plan.</small>
+          </div>
+        </div>
       </div>
 
       <footer class="footer container mono">
