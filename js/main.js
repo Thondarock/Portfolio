@@ -31,7 +31,7 @@ $('#labTrack').innerHTML = projects
       <div class="pcard__tech">${p.tech.map((t) => `<span>${esc(t)}</span>`).join('')}</div>
     </div>
     <div class="pcard__links">
-      ${p.live ? `<a class="live" href="${p.live}" target="_blank" rel="noopener" data-cursor="Launch">Live ${icon('i-arrow')}</a>` : ''}
+      ${p.live ? `<a class="live" href="${p.live}" target="_blank" rel="noopener" data-cursor="Launch">${p.liveLabel || 'Live'} ${icon('i-arrow')}</a>` : ''}
       <a href="${p.url}" target="_blank" rel="noopener" data-cursor="Code">${icon('i-github')} Source</a>
     </div>
   </article>`
@@ -280,7 +280,8 @@ function scrollAnimations() {
   $$('[data-count]').forEach((el) => {
     const o = { v: 0 };
     const pre = el.dataset.prefix || '';
-    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' }, onUpdate: () => (el.textContent = pre + Math.round(o.v)) });
+    const suf = el.dataset.suffix || '';
+    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' }, onUpdate: () => (el.textContent = pre + Math.round(o.v) + suf) });
   });
 
   // contact title chars

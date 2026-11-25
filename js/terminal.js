@@ -29,12 +29,14 @@ const COMMANDS = {
     'policies behind a modern Microsoft security stack.',
   ],
   role: () => [
-    `${C('a', 'Auxilium IT Services Pvt Ltd')} · current`,
+    `${C('a', 'Auxilium IT Services Pvt Ltd')} · Apr 2025 → present (L2 since Dec 2025)`,
     `  ${C('c', 'L2 SOC Analyst')}  escalations, investigations, RCA, phishing analysis`,
     `  ${C('v', 'SOC Engineer')}    playbooks, connectors, watchlists, policy hardening, DLP`,
+    `  ${C('m', '~100 alerts/day · 30–40% fewer false positives · 3 DLP policy designs')}`,
+    `  ${C('m', 'open to: SOC Engineer / SOC Analyst · remote or any location')}`,
   ],
   playbooks: () => [
-    'Sentinel SOAR playbooks (Logic Apps):',
+    '10–15 Sentinel SOAR playbooks (Logic Apps):',
     `  ${C('c', '→')} Sentinel → Jira incident integration`,
     `  ${C('c', '→')} Alert & incident notifications by email`,
     `  ${C('c', '→')} Closure comments posted to Microsoft Teams chat`,
@@ -60,7 +62,7 @@ const COMMANDS = {
   ],
   certs: () => ['Microsoft SC-200', 'AWS Academy Graduate: ML Foundations', 'Cyberthreya Elite Mastery', 'Palo Alto Cybersecurity Internship', 'NIKIST Hacker Mentorship Club Internship', 'IIDT Cybersecurity Internship'].map((c) => `  ${C('c', '✓')} ${c}`),
   education: () => [
-    `  ${C('c', '2024–2026')} MCA · Andhra University · 70.0%`,
+    `  ${C('c', '2024–2027')} MCA · Andhra University · ~90% · completing Jan 2027`,
     `  ${C('c', '2021–2024')} BCA · Gayatri Vidya Parishad College · 70.0%`,
     `  ${C('c', '2019–2021')} Intermediate MPC · Sri Chaitanya Junior College · 73.3%`,
   ],

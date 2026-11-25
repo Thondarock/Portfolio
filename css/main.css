@@ -33,7 +33,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -481,7 +481,17 @@ main { position: relative; z-index: 3; }
 .stack-dots i { width: 26px; height: 3px; border-radius: 3px; background: var(--line-2); transition: background .4s, width .4s; }
 .stack-dots i.is-active { width: 54px; background: var(--grad); }
 
-.stack-wrap::before { content: ""; position: absolute; inset: -10% -20%; z-index: -1; pointer-events: none; background: radial-gradient(60% 55% at 50% 50%, rgba(5,7,13,.92), rgba(5,7,13,.6) 60%, transparent 85%); }
+.stack-wrap::before { content: ""; position: absolute; inset: -10% 0; z-index: -1; pointer-events: none; background: radial-gradient(60% 55% at 50% 50%, rgba(5,7,13,.92), rgba(5,7,13,.6) 60%, transparent 85%); }
+
+.career { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; font-size: 12px; color: var(--muted); }
+.career b { color: var(--ink); font-weight: 700; margin-right: 6px; }
+.career .now b { color: var(--cyan); }
+.career i { width: 28px; height: 1px; background: var(--grad); box-shadow: 0 0 6px var(--cyan); }
+a.init { color: inherit; }
+a.init b { transition: color .3s; } a.init:hover b { color: var(--cyan); }
+.badge__verify { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--bg); border-bottom: 1px solid currentColor; }
+.badge__verify[href="#"] { display: none; }
+.pb__intro .grad-text { font-weight: 700; }
 
 /* lab: closing card */
 .pcard--more { justify-content: center; align-items: flex-start; padding: 34px 28px; gap: 16px; background: radial-gradient(120% 90% at 100% 0%, rgba(139,92,255,.28), transparent 60%), radial-gradient(100% 80% at 0% 100%, rgba(60,240,210,.18), transparent 60%), linear-gradient(160deg, rgba(22,30,54,.7), rgba(9,13,25,.6)); }
