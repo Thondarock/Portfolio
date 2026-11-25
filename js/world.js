@@ -4,11 +4,13 @@
 //   0 Hero ........ Aegis core (noise-displaced shield orb)
 //   1 About ....... Threat graph (nodes, edges, travelling pulses)
 //   2 Experience .. Hex tunnel (fly-through)
-//   3 Work ........ Data terrain (animated point field)
-//   4 Lab ......... Floating polyhedra shards
-//   5 Skills ...... Particle sphere
-//   6 Credentials . Gyroscope rings
-//   7 Contact ..... Portal vortex
+//   3 Engineering . SOAR playbook pipeline (flowing tubes + packets)
+//   4 Work ........ Data terrain (animated point field)
+//   5 Lab ......... Floating polyhedra shards
+//   6 Skills ...... Particle sphere
+//   7 Credentials . Gyroscope rings
+//   8 Contact ..... Portal vortex
+//  + scroll-speed warp, click shockwaves, mouse-reactive core
 // ============================================================
 import * as THREE from 'three';
 
@@ -84,6 +86,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
 
   const GLOW = glowTexture();
   const uTime = { value: 0 };
+  const uWarp = { value: 0 };
   const updaters = [];
   const Q = isMobile ? 0.5 : 1; // quality multiplier
 
@@ -182,7 +185,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     for (let i = 0; i < N; i++) {
       pos[i * 3] = rand(-28, 28);
       pos[i * 3 + 1] = rand(-16, 16);
-      pos[i * 3 + 2] = rand(-225, 12);
+      pos[i * 3 + 2] = rand(-295, 12);
       seed[i] = Math.random();
     }
     const g = new THREE.BufferGeometry();
@@ -190,9 +193,9 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     g.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
     const m = new THREE.ShaderMaterial({
       ...additive({}),
-      uniforms: { uTime, uPR: { value: renderer.getPixelRatio() }, uMap: { value: GLOW } },
+      uniforms: { uTime, uWarp, uPR: { value: renderer.getPixelRatio() }, uMap: { value: GLOW } },
       vertexShader: /* glsl */ `
-        uniform float uTime; uniform float uPR; attribute float aSeed; varying float vA; varying float vS;
+        uniform float uTime; uniform float uPR; uniform float uWarp; attribute float aSeed; varying float vA; varying float vS;
         void main(){
           vec3 p = position;
           p.y += sin(uTime * 0.2 + aSeed * 40.0) * 0.4;
@@ -200,9 +203,9 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
           vec4 mv = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mv;
           float tw = 0.55 + 0.45 * sin(uTime * (0.6 + aSeed * 2.0) + aSeed * 100.0);
-          vA = tw * smoothstep(60.0, 4.0, -mv.z) * smoothstep(0.3, 2.5, -mv.z);
+          vA = tw * smoothstep(60.0, 4.0, -mv.z) * smoothstep(0.3, 2.5, -mv.z) * (1.0 + uWarp * 1.5);
           vS = aSeed;
-          gl_PointSize = (aSeed > 0.97 ? 9.0 : 4.0) * uPR * (10.0 / -mv.z);
+          gl_PointSize = (aSeed > 0.97 ? 9.0 : 4.0) * uPR * (10.0 / -mv.z) * (1.0 + uWarp * 2.2);
         }`,
       fragmentShader: /* glsl */ `
         uniform sampler2D uMap; varying float vA; varying float vS;
@@ -313,6 +316,108 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     });
   }
 
+  // -------------------------------------------------- 3 · ENGINEERING playbook pipeline
+  const pipe = new THREE.Group();
+  const placePipe = () => {
+    const n = window.innerWidth <= 900;
+    pipe.position.set(n ? 0 : -5.6, n ? 0.6 : -1.1, -114);
+    pipe.scale.setScalar(n ? 0.42 : 0.62);
+  };
+  placePipe();
+  scene.add(pipe);
+  {
+    const flowMat = (col, speed) =>
+      new THREE.ShaderMaterial({
+        ...additive({}),
+        uniforms: { uTime, uC: { value: col }, uS: { value: speed } },
+        vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+        fragmentShader: `uniform float uTime; uniform vec3 uC; uniform float uS; varying vec2 vUv;
+          void main(){
+            float d = fract(vUv.x * 7.0 - uTime * uS);
+            float dash = smoothstep(0.0, 0.08, d) * (1.0 - smoothstep(0.22, 0.38, d));
+            gl_FragColor = vec4(uC, 0.16 + dash * 0.95);
+          }`,
+      });
+    const labelTex = [];
+    const makeLabel = (text, col) => {
+      const c = document.createElement('canvas');
+      c.width = 512; c.height = 128;
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      const draw = () => {
+        const g = c.getContext('2d');
+        g.clearRect(0, 0, 512, 128);
+        g.font = '600 46px "JetBrains Mono", ui-monospace, monospace';
+        g.textAlign = 'center'; g.textBaseline = 'middle';
+        g.shadowColor = col; g.shadowBlur = 18;
+        g.fillStyle = '#e9eef7';
+        g.fillText(text, 256, 64);
+        tex.needsUpdate = true;
+      };
+      draw();
+      labelTex.push(draw);
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+      sp.scale.set(3.6, 0.9, 1);
+      return sp;
+    };
+    if (document.fonts) document.fonts.ready.then(() => labelTex.forEach((d) => d()));
+
+    const nodes = [];
+    const makeNode = (pos, label, col, big) => {
+      const g = new THREE.Group();
+      g.position.copy(pos);
+      const geo = big ? new THREE.IcosahedronGeometry(0.95, 0) : new THREE.OctahedronGeometry(0.55, 0);
+      g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial(additive({ color: col, opacity: 0.9 }))));
+      g.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial(additive({ color: col, opacity: 0.12 }))));
+      const glow = new THREE.Sprite(new THREE.SpriteMaterial(additive({ map: GLOW, color: col, opacity: 0.8 })));
+      glow.scale.setScalar(big ? 4.2 : 2.4);
+      g.add(glow);
+      const lab = makeLabel(label, '#' + col.getHexString());
+      lab.position.set(0, big ? 1.75 : 1.2, 0);
+      g.add(lab);
+      g.userData.spin = rand(0.4, 0.9) * (Math.random() > 0.5 ? 1 : -1);
+      pipe.add(g);
+      nodes.push(g);
+      return g;
+    };
+    const src = new THREE.Vector3(-7.5, 0, 0);
+    const hub = new THREE.Vector3(0, 0, 0);
+    const outs = [
+      [new THREE.Vector3(7, 4.2, -1), 'JIRA', C.blue],
+      [new THREE.Vector3(8, 1.4, 1), 'EMAIL', C.amber],
+      [new THREE.Vector3(8, -1.4, 1), 'TEAMS', C.violet],
+      [new THREE.Vector3(7, -4.2, -1), 'AUTO-CLOSE', C.red],
+    ];
+    makeNode(src, 'SENTINEL', C.cyan, false);
+    makeNode(hub, 'PLAYBOOK', C.violet, true);
+    const links = [[new THREE.CatmullRomCurve3([src, new THREE.Vector3(-3.8, 1.2, 0.8), hub]), C.cyan]];
+    outs.forEach(([v, name, col]) => {
+      makeNode(v, name, col, false);
+      links.push([new THREE.CatmullRomCurve3([hub, new THREE.Vector3(3.2, v.y * 0.35, v.z * 0.5 + 0.6), v]), col]);
+    });
+    const packets = [];
+    links.forEach(([curve, col], k) => {
+      pipe.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 90, k === 0 ? 0.06 : 0.04, 8, false), flowMat(col, k === 0 ? 0.9 : 0.7)));
+      for (let j = 0; j < 3; j++) {
+        const sp = new THREE.Sprite(new THREE.SpriteMaterial(additive({ map: GLOW, color: col })));
+        sp.scale.setScalar(0.55);
+        sp.userData = { curve, t: j / 3, s: rand(0.18, 0.3) };
+        pipe.add(sp);
+        packets.push(sp);
+      }
+    });
+    // orbit ring around the hub
+    const hubRing = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.012, 6, 160), new THREE.MeshBasicMaterial(additive({ color: C.cyan, opacity: 0.6 })));
+    pipe.add(hubRing);
+    updaters.push((t, dt) => {
+      nodes.forEach((n) => { n.children[0].rotation.y += dt * n.userData.spin; n.children[1].rotation.y += dt * n.userData.spin; n.children[0].rotation.x += dt * 0.3; n.children[1].rotation.x += dt * 0.3; });
+      packets.forEach((p) => { p.userData.t = (p.userData.t + dt * p.userData.s) % 1; p.userData.curve.getPointAt(p.userData.t, p.position); });
+      hubRing.rotation.x = Math.sin(t * 0.7) * 0.9;
+      hubRing.rotation.y = t * 0.6;
+      pipe.rotation.y = Math.sin(t * 0.25) * 0.12;
+    });
+  }
+
   // -------------------------------------------------- 3 · WORK data terrain
   {
     const W = 90, D = 70;
@@ -343,7 +448,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
         }`,
     });
     const terrain = new THREE.Points(geo, mat);
-    terrain.position.set(0, -6.5, -104);
+    terrain.position.set(0, -6.5, -150);
     scene.add(terrain);
   }
 
@@ -362,7 +467,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
       s.add(new THREE.LineSegments(edgesG[k], new THREE.LineBasicMaterial(additive({ color: col, opacity: 0.7 }))));
       s.add(new THREE.Mesh(geos[k], new THREE.MeshBasicMaterial(additive({ color: col, opacity: 0.06 }))));
       const side = i % 2 ? 1 : -1;
-      s.position.set(side * rand(3.5, 11), rand(-5, 5), rand(-112, -140));
+      s.position.set(side * rand(3.5, 11), rand(-5, 5), rand(-172, -200));
       s.scale.setScalar(rand(0.35, 1.3));
       s.userData = { rx: rand(-0.6, 0.6), ry: rand(-0.6, 0.6), y: s.position.y, o: Math.random() * 6 };
       group.add(s);
@@ -380,7 +485,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
   // -------------------------------------------------- 5 · SKILLS particle sphere
   {
     const group = new THREE.Group();
-    group.position.set(0, 0, -152);
+    group.position.set(0, 0, -222);
     scene.add(group);
     const N = Math.floor(2200 * Q);
     const pos = new Float32Array(N * 3);
@@ -409,7 +514,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
   // -------------------------------------------------- 6 · CREDENTIALS gyroscope
   {
     const group = new THREE.Group();
-    group.position.set(isMobile ? 0 : -4, 0, -176);
+    group.position.set(isMobile ? 0 : -4, 0, -246);
     scene.add(group);
     const rings = [];
     [4.2, 3.4, 2.6, 1.8].forEach((r, i) => {
@@ -429,7 +534,7 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
   // -------------------------------------------------- 7 · CONTACT portal
   {
     const group = new THREE.Group();
-    group.position.set(0, 0, -202);
+    group.position.set(0, 0, -272);
     scene.add(group);
     const core = makeCore(1.1, isMobile ? 16 : 32);
     group.add(core);
@@ -473,17 +578,50 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     updaters.push((t) => { torus.rotation.x = Math.sin(t * 0.3) * 0.25; torus.rotation.y = Math.cos(t * 0.25) * 0.25; });
   }
 
+  // -------------------------------------------------- click shockwaves
+  const waves = Array.from({ length: 5 }, () => {
+    const m = new THREE.Mesh(new THREE.RingGeometry(0.96, 1, 96), new THREE.MeshBasicMaterial(additive({ color: C.cyan, opacity: 0, side: THREE.DoubleSide })));
+    m.visible = false;
+    m.userData.life = 99;
+    scene.add(m);
+    return m;
+  });
+  let waveIdx = 0;
+  let kick = 0;
+  const fwd = new THREE.Vector3();
+  function pulse() {
+    const w = waves[waveIdx++ % waves.length];
+    camera.getWorldDirection(fwd);
+    w.position.copy(camera.position).addScaledVector(fwd, 7);
+    w.quaternion.copy(camera.quaternion);
+    w.material.color.copy(waveIdx % 2 ? C.cyan : C.violet);
+    w.userData.life = 0;
+    w.visible = true;
+    kick = 0.45;
+  }
+  updaters.push((t, dt) => {
+    waves.forEach((w) => {
+      if (!w.visible) return;
+      w.userData.life += dt;
+      const l = w.userData.life / 1.6;
+      w.scale.setScalar(0.3 + l * 9);
+      w.material.opacity = Math.max(0, 1 - l) * 0.9;
+      if (l >= 1) w.visible = false;
+    });
+  });
+
   // -------------------------------------------------- camera rail
   const narrow = () => window.innerWidth <= 900;
   const camKeys = () => [
     { p: [0, 0, 8], l: [0, 0, -2] },
     { p: [0, 0.8, -24], l: [narrow() ? 0 : 2.5, 0, -36] },
     { p: [0, 0, -50], l: [0, 0, -70] },
-    { p: [0, 2.2, -86], l: [0, -3, -104] },
-    { p: [0, 0.6, -110], l: [0, 0, -130] },
-    { p: [0, 0, -137], l: [0, 0, -152] },
-    { p: [narrow() ? 0 : -1, 0.4, -162], l: [narrow() ? 0 : -4, 0, -176] },
-    { p: [0, 0, -188], l: [0, -2.4, -202] },
+    { p: [0, 0.6, -98], l: [0, 0, -114] },
+    { p: [0, 2.2, -132], l: [0, -3, -150] },
+    { p: [0, 0.6, -170], l: [0, 0, -190] },
+    { p: [0, 0, -207], l: [0, 0, -222] },
+    { p: [narrow() ? 0 : -1, 0.4, -232], l: [narrow() ? 0 : -4, 0, -246] },
+    { p: [0, 0, -258], l: [0, -2.4, -272] },
   ];
   let posCurve, lookCurve;
   const buildCurves = () => {
@@ -494,7 +632,8 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
   buildCurves();
   const STOPS = camKeys().length - 1;
 
-  const state = { target: 0, current: 0, mx: 0, my: 0, cmx: 0, cmy: 0, intro: 0 };
+  const state = { target: 0, current: 0, mx: 0, my: 0, cmx: 0, cmy: 0, intro: 0, speed: 0, warp: 0 };
+  let baseFov = camera.fov;
   const vPos = new THREE.Vector3();
   const vLook = new THREE.Vector3();
 
@@ -502,9 +641,10 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     const w = window.innerWidth, h = window.innerHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    camera.fov = w <= 900 ? 62 : 50;
+    baseFov = camera.fov = w <= 900 ? 62 : 50;
     camera.updateProjectionMatrix();
     placeHero();
+    placePipe();
     buildCurves();
   }
   window.addEventListener('resize', resize);
@@ -521,7 +661,17 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     uTime.value += dt * speed;
     const t = uTime.value;
 
-    state.current += (state.target - state.current) * Math.min(1, dt * 3.2);
+    const gap = state.target - state.current;
+    state.current += gap * Math.min(1, dt * 3.2);
+    // warp: the faster the scroll-flight, the wider the lens and the longer the stars
+    state.warp += (Math.min(1, Math.abs(gap) * 1.1) - state.warp) * Math.min(1, dt * 4);
+    uWarp.value = reduceMotion ? 0 : state.warp;
+    const fov = baseFov + uWarp.value * 16;
+    if (Math.abs(camera.fov - fov) > 0.01) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    // core reacts to pointer speed and clicks
+    state.speed *= Math.pow(0.04, dt);
+    kick *= Math.pow(0.08, dt);
+    coreMat.uniforms.uAmp.value += (0.28 + Math.min(0.3, state.speed * 0.5) + kick - coreMat.uniforms.uAmp.value) * Math.min(1, dt * 6);
     state.cmx += (state.mx - state.cmx) * Math.min(1, dt * 2.5);
     state.cmy += (state.my - state.cmy) * Math.min(1, dt * 2.5);
 
@@ -544,7 +694,8 @@ export function createWorld(canvas, { reduceMotion = false } = {}) {
     stops: STOPS,
     setProgress(p) { state.target = p; },
     jump(p) { state.target = state.current = p; },
-    setMouse(x, y) { state.mx = x; state.my = y; },
+    setMouse(x, y) { state.speed += Math.hypot(x - state.mx, y - state.my); state.mx = x; state.my = y; },
+    pulse,
     intro: state,
   };
 }

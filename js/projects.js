@@ -1,4 +1,5 @@
 // Projects pulled from github.com/Thondarock. Newest first.
+// To add one: copy an entry and set title, repo (or a full url), date, cat ('sec' | 'app'), accent, desc, tech, code and optionally live.
 const GH = 'https://github.com/Thondarock/';
 
 export const projects = [
@@ -144,4 +145,4 @@ export const projects = [
     tech: ['Python', 'RSA', 'Tkinter', 'Cryptography'],
     code: ['rsa.newkeys(2048)', 'armstrong = 1634', 'color ^= key', '→ ciphertext'],
   },
-].map((p) => ({ ...p, url: GH + p.repo }));
+].map((p) => ({ ...p, url: p.url || GH + p.repo }));

@@ -1,4 +1,5 @@
 import { projects } from './projects.js';
+import { initTerminal } from './terminal.js';
 
 const { gsap, ScrollTrigger, Lenis } = window;
 gsap.registerPlugin(ScrollTrigger);
@@ -35,7 +36,13 @@ $('#labTrack').innerHTML = projects
     </div>
   </article>`
   )
-  .join('');
+  .join('') + `
+  <article class="pcard pcard--more card3d" data-cat="any">
+    <span class="mono">// more builds</span>
+    <h3>New projects are landing here</h3>
+    <p>More SOC tooling and automation repos are on the way. Browse everything on GitHub in the meantime.</p>
+    <a class="btn btn--glow btn--sm magnetic" href="https://github.com/Thondarock" target="_blank" rel="noopener" data-cursor="GitHub">${icon('i-github')} github.com/Thondarock</a>
+  </article>`;
 
 /* =========================================================
    2. Text splitting
@@ -119,15 +126,22 @@ function onScroll() {
   const vh = window.innerHeight;
   const max = document.documentElement.scrollHeight - vh;
   let p = 0;
+  let cam = 0;
   for (let i = 0; i < tops.length; i++) {
     const a = tops[i];
     const b = i + 1 < tops.length ? tops[i + 1] : Math.max(a + 1, max);
-    if (y >= a) p = i + Math.min(1, (y - a) / Math.max(1, b - a));
+    if (y >= a) {
+      const f = Math.min(1, (y - a) / Math.max(1, b - a));
+      p = i + f;
+      // dwell on each scene while its content is read, then fly to the next
+      const g = Math.min(1, Math.max(0, (f - 0.35) / 0.65));
+      cam = i + g * g * (3 - 2 * g);
+    }
   }
   // the last section is shorter than a full travel: map it to its stop
   p = Math.min(p, sections.length - 1);
-  if (y >= max - 2) p = sections.length - 1;
-  world && world.setProgress(p);
+  if (y >= max - 2) p = cam = sections.length - 1;
+  world && world.setProgress(Math.min(cam, sections.length - 1));
 
   $('#railFill').style.transform = `scaleY(${max > 0 ? y / max : 0})`;
   const idx = Math.min(sections.length - 1, Math.floor(p + 0.45));
@@ -242,7 +256,7 @@ function scrollAnimations() {
   gsap.to($$('.w', st), { opacity: 1, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: st, start: 'top 80%', end: 'bottom 45%', scrub: 0.6 } });
 
   // 3D card reveals
-  const reveal3d = '.stat, .pillar, .job, .flow__step, .case, .init, .skillset, .badge, .edu__item, .extra__item, .about__photo';
+  const reveal3d = '.role, .pbi, .stat, .pillar, .job, .flow__step, .case, .init, .skillset, .badge, .edu__item, .extra__item, .about__photo';
   gsap.set(reveal3d, { opacity: 0 });
   ScrollTrigger.batch(reveal3d, {
     start: 'top 90%',
@@ -265,7 +279,8 @@ function scrollAnimations() {
   // counters
   $$('[data-count]').forEach((el) => {
     const o = { v: 0 };
-    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' }, onUpdate: () => (el.textContent = Math.round(o.v)) });
+    const pre = el.dataset.prefix || '';
+    gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' }, onUpdate: () => (el.textContent = pre + Math.round(o.v)) });
   });
 
   // contact title chars
@@ -317,7 +332,7 @@ $$('.lab__filters button').forEach((b) =>
     gsap.to(all, {
       opacity: 0, duration: 0.3, stagger: 0.015,
       onComplete() {
-        all.forEach((c) => (c.style.display = f === 'all' || c.dataset.cat === f ? '' : 'none'));
+        all.forEach((c) => (c.style.display = f === 'all' || c.dataset.cat === f || c.dataset.cat === 'any' ? '' : 'none'));
         ScrollTrigger.refresh();
         if (labST) scrollTo(labST.start + 1);
         gsap.fromTo(cards(), { opacity: 0 }, { opacity: 1, duration: 0.7, stagger: 0.05, ease: 'power2.out' });
@@ -330,15 +345,66 @@ $$('.lab__filters button').forEach((b) =>
 // drag to scroll on mobile viewport (native) + wheel shift on desktop handled by pin
 
 /* =========================================================
+   8b. Defense-in-depth stack (CSS 3D, scroll-driven on desktop)
+   ========================================================= */
+const stackEl = $('#stack');
+const layers = $$('.layer', stackEl);
+const panels = $$('.spanel');
+const dots = $$('.stack-dots i');
+let stackST = null;
+let stackIO = null;
+let stackIdx = -1;
+function setLayer(i) {
+  if (i === stackIdx || i < 0) return;
+  stackIdx = i;
+  layers.forEach((l, k) => l.classList.toggle('is-active', k === i));
+  panels.forEach((p, k) => p.classList.toggle('is-active', k === i));
+  dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+}
+function setupStack() {
+  stackST && stackST.kill();
+  stackST = null;
+  stackIO && stackIO.disconnect();
+  stackIdx = -1;
+  ['--gap', '--rz', '--rx'].forEach((v) => stackEl.style.removeProperty(v));
+  if (!isDesktop() || reduceMotion) {
+    if (!isDesktop()) stackEl.style.setProperty('--gap', '34px');
+    setLayer(0);
+    // mobile: highlight the layer whose panel is on screen
+    stackIO = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && setLayer(panels.indexOf(e.target))), { rootMargin: '-45% 0px -45% 0px' });
+    panels.forEach((p) => stackIO.observe(p));
+    return;
+  }
+  setLayer(0);
+  stackST = ScrollTrigger.create({
+    trigger: '#stackWrap',
+    start: 'center center',
+    end: () => '+=' + window.innerHeight * 3.2,
+    pin: true,
+    scrub: 0.6,
+    onUpdate(self) {
+      const pr = self.progress;
+      const open = Math.min(1, pr / 0.12);
+      stackEl.style.setProperty('--gap', 22 + open * 48 + 'px');
+      stackEl.style.setProperty('--rz', -38 + pr * 56 + 'deg');
+      stackEl.style.setProperty('--rx', 58 - Math.sin(pr * Math.PI) * 8 + 'deg');
+      setLayer(Math.min(5, Math.floor(pr * 6)));
+    },
+  });
+  layers.forEach((l, k) => (l.onclick = () => stackST && scrollTo(stackST.start + ((k + 0.5) / 6) * (stackST.end - stackST.start))));
+}
+
+/* =========================================================
    9. Skill sphere (DOM, true 3D projection)
    ========================================================= */
 const skills = [
-  ['Microsoft Sentinel', 'hot'], ['Defender XDR', 'hot'], ['Purview DLP', 'hot'], ['Intune', 'hot'], ['KQL', 'hot'],
+  ['Microsoft Sentinel', 'hot'], ['Defender XDR', 'hot'], ['Purview DLP', 'hot'], ['Intune', 'hot'], ['KQL', 'hot'], ['Logic Apps', 'hot'], ['Entra ID', 'hot'],
+  ['SOAR Playbooks', 'vio'], ['Sentinel → Jira', 'vio'], ['IAM Audits', 'vio'], ['SPF / DKIM / DMARC', 'vio'], ['Watchlists'], ['Data Connectors'], ['DNS Records'], ['Data Labeling'], ['Intune Policies'], ['Teams Automation'],
   ['Incident Response', 'vio'], ['Root Cause Analysis', 'vio'], ['Phishing Analysis', 'vio'], ['Detection Engineering', 'vio'], ['SIEM Tuning', 'vio'],
   ['Defender for Endpoint'], ['Defender for O365'], ['Sensitivity Labels'], ['Custom SITs'], ['Vulnerability Mgmt'],
   ['Nessus'], ['Burp Suite'], ['Wireshark'], ['Nmap'], ['Metasploit'], ['Kali Linux'], ['IDS / IPS'], ['Firewalls'],
   ['OWASP Top 10'], ['SQL Injection'], ['XSS'], ['Python'], ['JavaScript'], ['React'], ['Firebase'], ['HTML / CSS'],
-  ['Linux'], ['Windows'], ['Git'], ['Threat Intel'], ['Email Auth (SPF/DKIM/DMARC)'], ['SOP Authoring'], ['CTF'],
+  ['Linux'], ['Windows'], ['Git'], ['Threat Intel'], ['SOP Authoring'], ['CTF'],
 ];
 function initSphere() {
   const host = $('#sphere');
@@ -398,6 +464,10 @@ function initPointer() {
   window.addEventListener('pointermove', (e) => {
     mouse.x = e.clientX; mouse.y = e.clientY;
     world && world.setMouse((e.clientX / innerWidth) * 2 - 1, (e.clientY / innerHeight) * 2 - 1);
+  });
+  window.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('a, button, input, .sphere, .term, .layer')) return;
+    world && world.pulse && world.pulse();
   });
   if (!finePointer) return;
 
@@ -479,6 +549,8 @@ $$('.copy').forEach((b) =>
   clock();
   initSphere();
   initPointer();
+  initTerminal({ onOpen: () => lenis && lenis.stop(), onClose: () => lenis && lenis.start() });
+  setupStack();
   setupLab();
   scrollAnimations();
   ScrollTrigger.addEventListener('refresh', () => { measure(); onScroll(); fixGradients(); });
@@ -491,7 +563,7 @@ $$('.copy').forEach((b) =>
     if (Math.abs(innerWidth - w) < 2) return; // ignore mobile URL-bar height changes
     const crossed = (w > 900) !== (innerWidth > 900);
     w = innerWidth;
-    if (crossed) setupLab();
+    if (crossed) { setupStack(); setupLab(); }
     ScrollTrigger.refresh();
   });
 })();
