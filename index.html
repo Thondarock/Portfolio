@@ -1,376 +1,662 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Korada Purna Sai - SOC Analyst & Cybersecurity Professional">
-  <title>Korada Purna Sai | SOC Analyst</title>
-  <!-- Google Fonts -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Korada Purna Sai — L2 SOC Analyst &amp; SOC Engineer</title>
+  <meta name="description" content="Korada Purna Sai is an L2 SOC Analyst and SOC Engineer: Microsoft Sentinel, Defender XDR, Purview, Intune and Entra ID, SOAR playbooks, detection engineering, IAM audits, email security and DLP.">
+  <meta name="author" content="Korada Purna Sai">
+  <meta name="theme-color" content="#05070D">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Korada Purna Sai — L2 SOC Analyst &amp; SOC Engineer">
+  <meta property="og:description" content="Threat detection, incident response, Microsoft Purview DLP and security automation. An immersive 3D portfolio.">
+  <meta property="og:url" content="https://portfolio-pi-ecru-ymyq50e7wy.vercel.app/">
+  <meta property="og:image" content="https://portfolio-pi-ecru-ymyq50e7wy.vercel.app/assets/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap"
-    rel="stylesheet">
-  <!-- Font Awesome for other icons if needed, but we have images -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/img/portrait.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script>document.documentElement.classList.add('js')</script>
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Korada Purna Sai",
+    "jobTitle": "L2 SOC Analyst & SOC Engineer",
+    "worksFor": { "@type": "Organization", "name": "Auxilium IT Services Pvt Ltd" },
+    "alumniOf": ["Andhra University", "Gayatri Vidya Parishad College for Degree and P.G Courses"],
+    "sameAs": ["https://www.linkedin.com/in/purna-sai-korada-b6a634293/", "https://github.com/Thondarock", "https://www.instagram.com/tr__siddhu_"],
+    "knowsAbout": ["Microsoft Sentinel", "SOAR Playbooks", "Logic Apps", "IAM Audits", "SPF/DKIM/DMARC", "Microsoft Entra ID", "Microsoft Defender", "Microsoft Purview DLP", "Microsoft Intune", "Incident Response", "Detection Engineering", "KQL"]
+  }
+  </script>
 </head>
 
-<body>
-  <!-- Background Animation Canvas -->
-  <canvas id="bg-canvas"></canvas>
+<body class="is-loading">
+  <!-- SVG icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v14m-6-6 6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.58-.35ZM12.04 21.8h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.72.97.99-3.62-.23-.37a9.8 9.8 0 0 1-1.5-5.22c0-5.42 4.41-9.83 9.84-9.83a9.8 9.8 0 0 1 9.83 9.84c0 5.42-4.41 9.83-9.84 9.83Zm8.37-18.2A11.8 11.8 0 0 0 12.04 0C5.5 0 .2 5.32.2 11.86c0 2.09.55 4.13 1.59 5.93L.1 24l6.35-1.67a11.8 11.8 0 0 0 5.66 1.44h.01c6.53 0 11.84-5.32 11.84-11.86 0-3.17-1.23-6.15-3.47-8.39Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.48l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93Zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41Z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path d="M9 9h11v11H9zM5 15H4V4h11v1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 20 5v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="#" class="logo">KPS<span class="dot">.</span></a>
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__term" id="loaderTerm"></div>
+      <div class="loader__bottom">
+        <span class="loader__label">ESTABLISHING SECURE SESSION</span>
+        <span class="loader__count"><span id="loaderCount">0</span>%</span>
       </div>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#initiatives">Initiatives</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="loader__bar"><span id="loaderBar"></span></div>
     </div>
-  </nav>
+  </div>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="container hero-container">
-      <div class="hero-content">
-        <span class="greeting">Hello, I'm</span>
-        <h1 class="name">Korada Purna Sai</h1>
-        <h2 class="role">SOC Analyst <span class="highlight">&</span> Security Engineer</h2>
-        <p class="summary">
-          Detail-oriented SOC Analyst with hands-on experience in monitoring, investigating, and responding to security
-          incidents using Microsoft Sentinel and Microsoft Defender. Specializing in DLP policy design, vulnerability
-          management, and proactive threat detection.
+  <!-- ============ 3D WORLD ============ -->
+  <canvas id="world" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav__logo" data-cursor="Home" aria-label="Back to top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 54 15v16c0 13-9 23.4-22 27-13-3.6-22-14-22-27V15Z" fill="none" stroke="url(#ng)" stroke-width="4" stroke-linejoin="round"/><defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3CF0D2"/><stop offset="1" stop-color="#8B5CFF"/></linearGradient></defs></svg>
+      <span>KPS<em>.</em></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#work">Work</a>
+      <a href="#lab">Lab</a>
+      <a href="#skills">Skills</a>
+      <a href="#credentials">Credentials</a>
+    </nav>
+    <div class="nav__right">
+      <span class="nav__clock mono" title="Hyderabad, India (IST)"><i class="pulse"></i><span id="clock">--:--</span> IST</span>
+      <a href="#contact" class="btn btn--sm btn--glow magnetic" data-cursor="Say hi">Let's talk</a>
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links">
+      <a href="#about"><span class="mono">01</span>About</a>
+      <a href="#experience"><span class="mono">02</span>Experience</a>
+      <a href="#engineering"><span class="mono">03</span>Engineering</a>
+      <a href="#work"><span class="mono">04</span>Work</a>
+      <a href="#lab"><span class="mono">05</span>Lab</a>
+      <a href="#skills"><span class="mono">06</span>Skills</a>
+      <a href="#credentials"><span class="mono">07</span>Credentials</a>
+      <a href="#contact"><span class="mono">08</span>Contact</a>
+    </nav>
+  </div>
+
+  <!-- scroll rail -->
+  <aside class="rail" aria-hidden="true">
+    <div class="rail__track"><span class="rail__fill" id="railFill"></span></div>
+    <span class="rail__label mono" id="railLabel">00 — Home</span>
+  </aside>
+
+  <main id="smooth">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero section" id="home" data-stop="0" data-label="Home">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow mono reveal-fade"><span class="status-dot"></span> L2 SOC Analyst · SOC Engineer · Blue Team</p>
+          <h1 class="hero__name" aria-label="Korada Purna Sai">
+            <span class="line"><span class="split-chars">Korada</span></span>
+            <span class="line"><span class="split-chars grad-text">Purna Sai</span></span>
+          </h1>
+          <p class="hero__tag reveal-fade">I hunt threats <em class="serif">before</em> they become incidents, and engineer the playbooks, integrations and policies that let the SOC respond at machine speed.</p>
+          <div class="hero__cta reveal-fade">
+            <a href="#work" class="btn btn--glow magnetic" data-cursor="Explore">View my work <svg><use href="#i-arrow"/></svg></a>
+            <a href="assets/Korada-Purna-Sai-Resume.pdf" class="btn btn--ghost magnetic" download data-cursor="PDF">Résumé <svg><use href="#i-down"/></svg></a>
+          </div>
+          <div class="hero__meta reveal-fade">
+            <div><span class="mono k">Currently</span><span>L2 SOC Analyst &amp; Engineer @ Auxilium</span></div>
+            <div><span class="mono k">Certified</span><span>Microsoft SC-200</span></div>
+            <div><span class="mono k">Based in</span><span>Hyderabad · open to remote</span></div>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="idcard" data-tilt data-tilt-max="14" id="idcard">
+            <div class="idcard__frame">
+              <div class="idcard__top mono"><span>L2 // ID-KPS-01</span><span class="ok">● ACTIVE</span></div>
+              <div class="idcard__photo">
+                <picture>
+                  <source srcset="assets/img/portrait.webp" type="image/webp">
+                  <img src="assets/img/portrait.jpg" alt="Portrait of Korada Purna Sai" width="649" height="760">
+                </picture>
+                <div class="idcard__scan"></div>
+                <span class="hud hud--tl"></span><span class="hud hud--tr"></span><span class="hud hud--bl"></span><span class="hud hud--br"></span>
+                <div class="idcard__match mono">FACE MATCH <b>99.8%</b></div>
+              </div>
+              <div class="idcard__info">
+                <div>
+                  <p class="idcard__name">Korada Purna Sai</p>
+                  <p class="mono idcard__role">SOC Engineer · L2 Analyst</p>
+                </div>
+                <svg class="idcard__shield"><use href="#i-shield"/></svg>
+              </div>
+              <div class="idcard__barcode" aria-hidden="true"></div>
+            </div>
+            <div class="idcard__glare"></div>
+          </div>
+          <div class="chip chip--a mono" data-depth="40"><i></i>Sentinel · KQL</div>
+          <div class="chip chip--b mono" data-depth="60"><i></i>Defender XDR</div>
+          <div class="chip chip--c mono" data-depth="30"><i></i>Purview DLP</div>
+          <div class="chip chip--d mono" data-depth="50"><i></i>Logic Apps · SOAR</div>
+        </div>
+      </div>
+
+      <div class="hero__bottom">
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee__track mono">
+            <span>Microsoft Sentinel</span><span>Logic Apps Playbooks</span><span>Entra ID · IAM</span><span>SPF · DKIM · DMARC</span><span>Defender for Endpoint</span><span>Defender for Office 365</span><span>Purview DLP</span><span>Intune</span><span>KQL</span><span>Incident Response</span><span>Root Cause Analysis</span><span>Phishing Analysis</span><span>Nessus</span><span>Burp Suite</span><span>Wireshark</span><span>Nmap</span><span>Metasploit</span><span>Python</span>
+            <span>Microsoft Sentinel</span><span>Logic Apps Playbooks</span><span>Entra ID · IAM</span><span>SPF · DKIM · DMARC</span><span>Defender for Endpoint</span><span>Defender for Office 365</span><span>Purview DLP</span><span>Intune</span><span>KQL</span><span>Incident Response</span><span>Root Cause Analysis</span><span>Phishing Analysis</span><span>Nessus</span><span>Burp Suite</span><span>Wireshark</span><span>Nmap</span><span>Metasploit</span><span>Python</span>
+          </div>
+        </div>
+        <a href="#about" class="scroll-cue mono" data-cursor="Scroll"><span class="scroll-cue__line"></span>Scroll to enter</a>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about" data-stop="1" data-label="About">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">01</span>
+          <span class="sec-kicker mono">// whoami</span>
+        </header>
+
+        <p class="statement" data-words>
+          I'm an L2 SOC Analyst and SOC Engineer. As an analyst I lead investigations in Microsoft Sentinel and Defender: phishing, account misuse, root cause analysis. As an engineer I build the playbooks, connectors, watchlists and policies that make the whole SOC faster, from Sentinel-to-Jira automation to DLP labeling.
         </p>
-        <div class="cta-buttons">
-          <a href="#contact" class="btn primary-btn">Get in Touch</a>
-          <a href="#projects" class="btn secondary-btn">View Work</a>
-        </div>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/purna-sai-korada-b6a634293/" target="_blank"><img
-              src="assets/images/social-media-icons/linkedin.png" alt="LinkedIn"></a>
-          <a href="https://github.com/Thondarock/" target="_blank"><img
-              src="assets/images/social-media-icons/github.png" alt="GitHub"></a>
-          <!-- Add other links if available in real life, assuming placeholders or removed if not provided -->
+
+        <div class="about__grid">
+          <figure class="about__photo" data-tilt data-tilt-max="8">
+            <picture>
+              <source srcset="assets/img/about.webp" type="image/webp">
+              <img src="assets/img/about.jpg" alt="Korada Purna Sai, outdoors" loading="lazy" width="960" height="1200">
+            </picture>
+            <figcaption class="mono">Off shift</figcaption>
+          </figure>
+
+          <div class="about__body">
+            <div class="roles">
+              <div class="role card3d" data-tilt data-tilt-max="6">
+                <span class="role__tag mono">Role A</span>
+                <h3>SOC Analyst <em class="serif grad-text">L2</em></h3>
+                <p>Escalation point for complex incidents: deep-dive investigations, RCA, remediation and guiding the response end to end.</p>
+              </div>
+              <div class="role card3d" data-tilt data-tilt-max="6">
+                <span class="role__tag mono">Role B</span>
+                <h3>SOC <em class="serif grad-text">Engineer</em></h3>
+                <p>Builds and tunes the platform: SOAR playbooks, integrations, data connectors, watchlists, policy hardening and DLP.</p>
+              </div>
+            </div>
+            <div class="stats">
+              <div class="stat card3d"><span class="stat__num"><b data-count="2" data-prefix="L">L0</b></span><span class="stat__label">Promoted to L2 &amp; SOC Engineer in 8 months (Apr → Dec 2025)</span></div>
+              <div class="stat card3d"><span class="stat__num"><b data-count="15" data-prefix="10–">0</b></span><span class="stat__label">Sentinel SOAR playbooks built on Logic Apps</span></div>
+              <div class="stat card3d"><span class="stat__num"><b data-count="100" data-prefix="~">0</b></span><span class="stat__label">Alerts triaged per day across Sentinel &amp; Defender XDR</span></div>
+              <div class="stat card3d"><span class="stat__num"><b data-count="40" data-prefix="30–" data-suffix="%">0</b></span><span class="stat__label">False-positive reduction from analytic rule tuning</span></div>
+              <div class="stat card3d"><span class="stat__num"><b data-count="3">0</b></span><span class="stat__label">Full DLP policy designs: Endpoint, Exchange &amp; Cloud Apps</span></div>
+              <div class="stat card3d"><span class="stat__num"><b data-count="23">0</b></span><span class="stat__label">Public repositories, from SOC tooling to AI apps</span></div>
+            </div>
+            <div class="about__pillars">
+              <div class="pillar"><span class="mono">→ Detect</span><p>Analytic rules, rule tuning, data connectors and domain watchlists in Sentinel.</p></div>
+              <div class="pillar"><span class="mono">→ Respond</span><p>Phishing &amp; malicious link analysis, account misuse, RCA and remediation.</p></div>
+              <div class="pillar"><span class="mono">→ Automate</span><p>Logic Apps playbooks: Jira sync, email alerts, Teams closure notes, auto-close.</p></div>
+              <div class="pillar"><span class="mono">→ Harden</span><p>Defender, endpoint &amp; Intune policy reviews, SPF / DKIM / DMARC fixes.</p></div>
+              <div class="pillar"><span class="mono">→ Audit</span><p>Identity and IAM audits of accounts, roles and access.</p></div>
+              <div class="pillar"><span class="mono">→ Protect</span><p>Purview DLP tuning, sensitivity labeling and vulnerability management.</p></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero-image">
-        <div class="image-wrapper">
-          <img src="assets/face.jpg" alt="Korada Purna Sai">
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Experience Section -->
-  <section class="section" id="experience">
-    <div class="container">
-      <h2 class="section-title">Professional Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Current Role</div>
-          <div class="timeline-content card">
-            <h3>SOC Analyst</h3>
-            <h4>Auxilium IT Services Pvt Ltd</h4>
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section experience" id="experience" data-stop="2" data-label="Experience">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">02</span>
+          <span class="sec-kicker mono">// experience</span>
+        </header>
+        <h2 class="sec-title"><span class="split-words">Analyst and engineer,</span> <em class="serif grad-text split-words">leading at L2</em></h2>
 
-            <div class="role-group">
-              <h5>Security Operations</h5>
-              <ul>
-                <li>Monitored, triaged, and investigated alerts using Microsoft Sentinel and Microsoft Defender.</li>
-                <li>Performed phishing email and malicious link analysis with remediation actions.</li>
-                <li>Conducted Root Cause Analysis (RCA) for incidents including unusual sign-in attempts and account
-                  misuse.</li>
+        <article class="job card3d">
+          <div class="job__head">
+            <div>
+              <p class="mono job__when"><span class="status-dot"></span> Dec 2025 — Present · Level 2</p>
+              <h3 class="job__title">L2 SOC Analyst <span class="job__amp serif">&amp;</span> SOC Engineer</h3>
+              <p class="job__org">Auxilium IT Services Pvt Ltd</p>
+              <div class="career mono" aria-label="Career progression">
+                <span><b>Apr 2025</b> Joined as SOC Analyst</span><i></i><span><b>+8 months</b> promoted</span><i></i><span class="now"><b>Dec 2025</b> L2 SOC Analyst + SOC Engineer</span>
+              </div>
+            </div>
+            <div class="job__stack mono">
+              <span>Sentinel</span><span>Defender XDR</span><span>Logic Apps</span><span>Intune</span><span>Purview</span><span>Entra ID</span><span>Jira</span><span>KQL</span>
+            </div>
+          </div>
+
+          <div class="job__cols">
+            <div class="job__col">
+              <h4 class="mono">01 / L2 Security Operations</h4>
+              <ul class="ticks">
+                <li>Lead L2 investigations and escalations across <b>Microsoft Sentinel</b> and <b>Defender XDR</b>, triaging <b>~100 alerts per day</b>.</li>
+                <li>Phishing email and malicious link analysis with remediation actions.</li>
+                <li>Root cause analysis for unusual sign-in attempts and account misuse.</li>
                 <li>Investigated Intune non-compliant devices and documented mitigation steps.</li>
               </ul>
             </div>
-
-            <div class="role-group">
-              <h5>Detection Engineering & SOPs</h5>
-              <ul>
-                <li>Tuned analytical rules to improve alert quality and reduce false positives.</li>
-                <li>Identified and corrected port scan detection logic.</li>
-                <li>Created analytical rules for Global Administrator password reset activity and abuse of
-                  forgot-password methods.</li>
-                <li>Authored SOPs for port scan detection and email analysis.</li>
+            <div class="job__col">
+              <h4 class="mono">02 / Detection Engineering &amp; SOPs</h4>
+              <ul class="ticks">
+                <li>Built <b>30–40 Sentinel analytic rules</b> across identity, endpoint, email and Exchange (see the detection library below).</li>
+                <li>Tuned analytic rules, cutting <b>false positives by 30–40%</b>.</li>
+                <li>Identified and corrected flawed port-scan detection logic.</li>
+                <li>Created analytic rules for <b>Global Administrator password resets</b> and forgot-password abuse using audit logs.</li>
+                <li>Authored SOPs for port-scan detection and email analysis.</li>
+              </ul>
+            </div>
+            <div class="job__col">
+              <h4 class="mono">03 / SOC Engineering</h4>
+              <ul class="ticks">
+                <li>Built <b>10–15 Sentinel SOAR playbooks</b>: Jira integration, incident emails, Teams closure comments, conditional auto-close.</li>
+                <li>Onboarded data connectors and log ingestion; maintained <b>domain watchlists</b>.</li>
+                <li>Checked <b>SPF, DKIM &amp; DMARC</b> and fixed them through DNS TXT records.</li>
+                <li>Ticketed Defender, endpoint &amp; Intune policy misconfigurations and drove them to resolution.</li>
+                <li>Ran <b>identity &amp; IAM audits</b>; designed <b>3 complete DLP policy sets</b> (Endpoint, Exchange, Cloud Apps) and lead ongoing tuning and labeling.</li>
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </article>
 
-  <!-- Projects Section -->
-  <section class="section" id="projects">
-    <div class="container">
-      <h2 class="section-title">Key Projects</h2>
-      <div class="project-grid">
-        <!-- Project 1 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3>Microsoft Purview DLP Tuning</h3>
-            <p class="project-desc">Tuned DLP policy logic, rule conditions, severity, and confidence levels. Identified
-              policy gaps and performed testing, validation, and documentation. Delivered final report approved by
-              Security Architect.</p>
-            <div class="tags">
-              <span>DLP</span>
-              <span>Microsoft Purview</span>
-              <span>Compliance</span>
-            </div>
+        <div class="detlib card3d">
+          <div class="detlib__head">
+            <p class="mono detlib__k">// detection library</p>
+            <h3><span class="grad-text">30–40</span> analytic rules I've built</h3>
           </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3>Vulnerability Management Program</h3>
-            <p class="project-desc">Conducted software discovery and maintained device/application inventory. Identified
-              endpoint vulnerabilities and configuration weaknesses. Documented findings and remediation status.</p>
-            <div class="tags">
-              <span>Vulnerability Mgmt</span>
-              <span>Endpoints</span>
-              <span>Risk Assessment</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3>ePHI DLP Implementation</h3>
-            <p class="project-desc">Designed and implemented DLP policies for ePHI data (New Acquisition). Created
-              custom Sensitive Information Types (SITs) and applied sensitivity labels and enforcement actions.</p>
-            <div class="tags">
-              <span>ePHI</span>
-              <span>Healthcare Security</span>
-              <span>Data Protection</span>
-            </div>
-          </div>
-        </div>
-  </section>
-
-  <!-- Security Initiatives & Automation Section (New) -->
-  <section class="section" id="initiatives">
-    <div class="container">
-      <h2 class="section-title">Security Initiatives & Automation</h2>
-      <div class="project-grid">
-        <!-- Initiative 1 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3><i class="fas fa-magic"></i> Automated Ticket Formatter</h3>
-            <p class="project-desc">Developed a web-based tool to parse raw email details into formatted ticket
-              templates. Significantly reduced manual entry time, allowing the team to focus finding results.</p>
-            <div class="tags">
-              <span>Web App</span>
-              <span>Automation</span>
-              <span>Workflow Optimization</span>
-            </div>
-            <a href="#" class="btn secondary-btn" style="margin-left:0; margin-top:1rem; font-size: 0.8rem;">View Tool
-              <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Initiative 2 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3><i class="fas fa-shield-virus"></i> Bulk IOC Reputation Checker</h3>
-            <p class="project-desc">Python-based automation that queries free APIs to filter malicious IPs, files, and
-              URLs from internal logs and IOC lists, enhancing threat detection speed.</p>
-            <div class="tags">
-              <span>Python</span>
-              <span>Threat Intel</span>
-              <span>API Integration</span>
-            </div>
-            <a href="#" class="btn secondary-btn" style="margin-left:0; margin-top:1rem; font-size: 0.8rem;">View Script
-              <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Initiative 3 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3><i class="fas fa-newspaper"></i> AI-Powered Cyber Newsletter</h3>
-            <p class="project-desc">Automated daily newsletter system. Aggregates latest threats from popular sources,
-              uses AI to summarize impact/mitigation, and emails brief reports to the team.</p>
-            <div class="tags">
-              <span>Python</span>
-              <span>AI/LLM</span>
-              <span>Daily Briefing</span>
-            </div>
-            <a href="#" class="btn secondary-btn" style="margin-left:0; margin-top:1rem; font-size: 0.8rem;">View Repo
-              <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Initiative 4 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3><i class="fas fa-file-alt"></i> Port Scan Reporting Template</h3>
-            <p class="project-desc">Standardized template system that prompts for necessary details and triggers a
-              structured port scan report, ensuring consistency in ticketing.</p>
-            <div class="tags">
-              <span>Reporting</span>
-              <span>Standardization</span>
-              <span>Ticketing</span>
-            </div>
-            <a href="#" class="btn secondary-btn" style="margin-left:0; margin-top:1rem; font-size: 0.8rem;">View
-              Template <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Initiative 5 -->
-        <div class="project-card card">
-          <div class="card-content">
-            <h3><i class="fas fa-clipboard-check"></i> Configuration & Compliance Audits</h3>
-            <p class="project-desc">Proactive audit program identifying misconfigurations (e.g., Android screenshot
-              permissions, Password policies). delivering step-by-step remediation reports.</p>
-            <div class="tags">
-              <span>Auditing</span>
-              <span>Compliance</span>
-              <span>Hardening</span>
-            </div>
-            <a href="#" class="btn secondary-btn" style="margin-left:0; margin-top:1rem; font-size: 0.8rem;">View
-              Reports <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section class="section" id="skills">
-    <div class="container">
-      <h2 class="section-title">Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-category card">
-          <h3><i class="fas fa-shield-alt"></i> Cybersecurity</h3>
-          <ul>
-            <li>Endpoint Security & Compliance</li>
-            <li>Email & Phishing Analysis</li>
-            <li>Incident Response & RCA</li>
-            <li>SIEM Monitoring & Rule Tuning</li>
+          <ul class="detlib__list mono">
+            <li><b>Endpoint</b>PowerShell launched from Word / Office macros</li>
+            <li><b>Endpoint</b>Suspicious file changes and mass file modification</li>
+            <li><b>Identity</b>Global Administrator password reset activity</li>
+            <li><b>Identity</b>Forgot-password method abuse (audit logs)</li>
+            <li><b>Identity</b>Unusual sign-ins and account misuse</li>
+            <li><b>Email</b>Suspicious SMTP activity</li>
+            <li><b>Exchange</b>Suspicious inbox and mail-flow rule changes</li>
+            <li><b>Network</b>Port-scan detection (logic rebuilt)</li>
+            <li class="more">+ many more across Sentinel &amp; Defender XDR</li>
           </ul>
         </div>
-        <div class="skill-category card">
-          <h3><i class="fas fa-cloud"></i> Cloud Skills</h3>
-          <ul>
-            <li>Microsoft Sentinel</li>
-            <li>Microsoft Defender (Endpoint/Office 365)</li>
-            <li>Microsoft Purview (DLP, SITs, Labels)</li>
-            <li>Microsoft Intune</li>
-          </ul>
-        </div>
-        <div class="skill-category card">
-          <h3><i class="fas fa-tools"></i> Tools</h3>
-          <ul>
-            <li>Kali Linux, Nmap, Metasploit</li>
-            <li>Wireshark, Burp Suite, Nessus</li>
-            <li>Git, Microsoft Office Suite</li>
-          </ul>
-        </div>
-        <div class="skill-category card">
-          <h3><i class="fas fa-code"></i> Languages & Web</h3>
-          <ul>
-            <li>Python, HTML, CSS</li>
-            <li>SQL Injection, XSS</li>
-            <li>OWASP Top 10</li>
-            <li>Linux & Windows Expert</li>
-          </ul>
+
+        <div class="flow" aria-label="Incident lifecycle">
+          <div class="flow__step"><span class="mono">01</span><b>Detect</b><small>Analytics · watchlists</small></div>
+          <div class="flow__step"><span class="mono">02</span><b>Triage</b><small>Severity &amp; scope</small></div>
+          <div class="flow__step"><span class="mono">03</span><b>Investigate</b><small>Defender XDR · KQL</small></div>
+          <div class="flow__step"><span class="mono">04</span><b>RCA</b><small>Sign-in &amp; audit logs</small></div>
+          <div class="flow__step"><span class="mono">05</span><b>Automate</b><small>Logic Apps playbooks</small></div>
+          <div class="flow__step"><span class="mono">06</span><b>Close</b><small>Jira · Teams · email</small></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Education Section -->
-  <section class="section" id="education">
-    <div class="container">
-      <h2 class="section-title">Education</h2>
-      <div class="education-grid">
-        <div class="education-card card">
-          <h3>MCA (Master of Computer Applications)</h3>
-          <p class="institution">Andhra University</p>
-          <p class="year">2024 - 2026</p>
-          <p class="grade">Percentage: 70.0%</p>
+    <!-- ============ ENGINEERING ============ -->
+    <section class="section engineering" id="engineering" data-stop="3" data-label="Engineering">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">03</span>
+          <span class="sec-kicker mono">// soc engineering</span>
+        </header>
+        <h2 class="sec-title"><span class="split-words">Engineering the machine</span> <em class="serif grad-text split-words">behind the alerts</em></h2>
+
+        <div class="pb">
+          <div class="pb__stage" aria-hidden="true">
+            <span class="pb__stage-label mono"><i class="pulse"></i> live playbook pipeline</span>
+          </div>
+          <div class="pb__list">
+            <p class="pb__intro"><b class="grad-text">10–15</b> Sentinel playbooks built on Logic Apps take repetitive work off the analysts, so every incident gets the same fast, documented handling.</p>
+            <div class="pbi card3d"><span class="pbi__ic mono">JIRA</span><div><b>Sentinel → Jira integration</b><p>Incidents raise and sync Jira tickets automatically, with the evidence attached.</p></div></div>
+            <div class="pbi card3d"><span class="pbi__ic mono">MAIL</span><div><b>Alert &amp; incident emails</b><p>The right people get incident and alert details by email the moment they fire.</p></div></div>
+            <div class="pbi card3d"><span class="pbi__ic mono">TEAMS</span><div><b>Closure comments to Teams</b><p>When an incident closes, its closure comment is posted to the team's Teams chat.</p></div></div>
+            <div class="pbi card3d"><span class="pbi__ic mono">AUTO</span><div><b>Conditional auto-close</b><p>Incidents that match defined conditions are closed automatically, cutting the noise.</p></div></div>
+            <p class="pbi__more mono">+ more playbooks across the incident lifecycle</p>
+          </div>
         </div>
-        <div class="education-card card">
-          <h3>BCA (Bachelor of Computer Applications)</h3>
-          <p class="institution">Gayatri Vidya Parishad College</p>
-          <p class="year">2021 - 2024</p>
-          <p class="grade">Percentage: 70.0%</p>
-        </div>
-        <div class="education-card card">
-          <h3>Intermediate MPC</h3>
-          <p class="institution">Sri Chaitanya Junior College</p>
-          <p class="year">2019 - 2021</p>
+
+        <div class="stack-wrap" id="stackWrap">
+          <div class="stack-scene" aria-hidden="true">
+            <div class="stack" id="stack">
+              <div class="layer" style="--i:0;--c:#ff4d6d"><div class="layer__face"><span class="mono">01</span><b>Identity &amp; Access</b></div></div>
+              <div class="layer" style="--i:1;--c:#ffb547"><div class="layer__face"><span class="mono">02</span><b>Endpoint &amp; Device</b></div></div>
+              <div class="layer" style="--i:2;--c:#7aa8ff"><div class="layer__face"><span class="mono">03</span><b>Email Security</b></div></div>
+              <div class="layer" style="--i:3;--c:#8b5cff"><div class="layer__face"><span class="mono">04</span><b>Data Protection</b></div></div>
+              <div class="layer" style="--i:4;--c:#3cf0d2"><div class="layer__face"><span class="mono">05</span><b>Detection</b></div></div>
+              <div class="layer" style="--i:5;--c:#e9eef7"><div class="layer__face"><span class="mono">06</span><b>Response</b></div></div>
+            </div>
+          </div>
+          <div class="stack-info">
+            <p class="mono stack-info__kicker">Defense in depth: every layer I work on</p>
+            <div class="stack-panels">
+              <article class="spanel" style="--c:#ff4d6d">
+                <p class="mono spanel__n">01 / 06 · Entra ID</p>
+                <h3>Identity &amp; Access</h3>
+                <ul class="ticks">
+                  <li>Identity and IAM audits: accounts, role assignments and access reviews.</li>
+                  <li>Detections for Global Admin password resets and forgot-password abuse.</li>
+                  <li>RCA for unusual sign-ins and account misuse.</li>
+                </ul>
+              </article>
+              <article class="spanel" style="--c:#ffb547">
+                <p class="mono spanel__n">02 / 06 · Defender for Endpoint · Intune</p>
+                <h3>Endpoint &amp; Device</h3>
+                <ul class="ticks">
+                  <li>Reviewed Defender, endpoint and Intune policies for misconfigurations.</li>
+                  <li>Every misconfiguration ticketed and followed through its resolution steps.</li>
+                  <li>Non-compliant device investigations and vulnerability management.</li>
+                </ul>
+              </article>
+              <article class="spanel" style="--c:#7aa8ff">
+                <p class="mono spanel__n">03 / 06 · Defender for Office 365 · DNS</p>
+                <h3>Email Security</h3>
+                <ul class="ticks">
+                  <li>Checked SPF, DKIM and DMARC for the organisation's domains.</li>
+                  <li>Resolved failures by correcting the domains' DNS TXT records.</li>
+                  <li>Email security policy reviews, phishing analysis and quarantine handling.</li>
+                </ul>
+              </article>
+              <article class="spanel" style="--c:#8b5cff">
+                <p class="mono spanel__n">04 / 06 · Microsoft Purview</p>
+                <h3>Data Protection</h3>
+                <ul class="ticks">
+                  <li>DLP is a continuous program: policies are tuned and tweaked constantly.</li>
+                  <li>Now rolling out data classification, sensitivity labeling and onboarding processes.</li>
+                  <li>Custom SITs and ePHI DLP for a newly acquired business.</li>
+                </ul>
+              </article>
+              <article class="spanel" style="--c:#3cf0d2">
+                <p class="mono spanel__n">05 / 06 · Microsoft Sentinel</p>
+                <h3>Detection</h3>
+                <ul class="ticks">
+                  <li>Data connectors and log ingestion into Sentinel.</li>
+                  <li>Watchlists of domains used in detections and investigations.</li>
+                  <li>Analytic rules authored and tuned to cut false positives.</li>
+                </ul>
+              </article>
+              <article class="spanel" style="--c:#e9eef7">
+                <p class="mono spanel__n">06 / 06 · Logic Apps · Jira · Teams</p>
+                <h3>Response</h3>
+                <ul class="ticks">
+                  <li>SOAR playbooks for ticketing, notifications and auto-closure.</li>
+                  <li>SOPs and browser tools that turn raw telemetry into tickets.</li>
+                  <li>L2 escalation handling with full documentation.</li>
+                </ul>
+              </article>
+            </div>
+            <div class="stack-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Certifications Section -->
-  <section class="section" id="certifications">
-    <div class="container">
-      <h2 class="section-title">Certifications</h2>
-      <ul class="cert-list">
-        <li class="card">Microsoft SC-200</li>
-        <li class="card">AWS Academy Graduate – Machine Learning Foundations</li>
-        <li class="card">Cyberthreya Elite Mastery</li>
-        <li class="card">NIKIST Hacker Mentorship Club Internship</li>
-        <li class="card">Palo Alto Cybersecurity Internship</li>
-        <li class="card">IIDT Cybersecurity Internship</li>
-      </ul>
-    </div>
-  </section>
+    <!-- ============ WORK / KEY PROJECTS ============ -->
+    <section class="section work" id="work" data-stop="4" data-label="Work">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">04</span>
+          <span class="sec-kicker mono">// key projects</span>
+        </header>
+        <h2 class="sec-title"><span class="split-words">Programs shipped to</span> <em class="serif grad-text split-words">production</em></h2>
 
-  <!-- Contact Section -->
-  <section class="section" id="contact">
-    <div class="container contact-container">
-      <h2 class="section-title">Contact Me</h2>
-      <div class="contact-card card">
-        <div class="contact-info">
-          <div class="info-item">
-            <i class="fas fa-envelope"></i>
-            <p>siddhukorda756@gmail.com</p>
-          </div>
-          <div class="info-item">
-            <i class="fas fa-phone"></i>
-            <p>+91 7780411816</p>
-          </div>
-          <div class="social-links-large">
-            <a href="https://www.linkedin.com/in/purna-sai-korada-b6a634293/" target="_blank"><img
-                src="assets/images/social-media-icons/linkedin.png" alt="LinkedIn"></a>
-            <a href="https://wa.link/tjywpp" target="_blank"><img src="assets/images/social-media-icons/whatsapp.png"
-                alt="WhatsApp"></a>
-            <a href="https://x.com/Thonda420" target="_blank"><img src="assets/images/social-media-icons/twitter.png"
-                alt="Twitter"></a>
-            <a href="https://www.instagram.com/thonda______rock______/" target="_blank"><img
-                src="assets/images/social-media-icons/instagram.svg" alt="Instagram"></a>
+        <div class="cases">
+          <article class="case card3d" data-tilt data-tilt-max="6">
+            <div class="case__num mono">P—01</div>
+            <div class="case__body">
+              <p class="mono case__tag">Microsoft Purview · Ongoing program <span class="live-tag">● LIVE</span></p>
+              <h3>DLP: Tuning → Data Labeling</h3>
+              <ul class="ticks">
+                <li>Tuned DLP policy logic, rule conditions, severity and confidence levels.</li>
+                <li>Found policy gaps: incorrect catch rules, low-confidence false positives, missing exclusions.</li>
+                <li>Designed <b>3 complete DLP policy sets</b> covering Endpoint, Exchange Online and Cloud Apps.</li>
+                <li>Tuning and tweaking continues as an ongoing process as the business changes.</li>
+                <li>Now rolling out <b>data classification, sensitivity labeling</b> and onboarding processes.</li>
+              </ul>
+            </div>
+            <div class="case__result"><span class="mono">Outcome</span><p>Report <b>approved by the Security Architect</b>, deployed to production and now growing into labeling.</p></div>
+          </article>
+
+          <article class="case card3d" data-tilt data-tilt-max="6">
+            <div class="case__num mono">P—02</div>
+            <div class="case__body">
+              <p class="mono case__tag">Endpoint Security · Risk</p>
+              <h3>Vulnerability Management Program</h3>
+              <ul class="ticks">
+                <li>Ran software discovery and maintained device and application inventory.</li>
+                <li>Identified endpoint vulnerabilities and configuration weaknesses.</li>
+                <li>Documented findings and remediation status in vulnerability reports.</li>
+              </ul>
+            </div>
+            <div class="case__result"><span class="mono">Outcome</span><p>A tracked, documented <b>remediation pipeline</b> across the endpoint estate.</p></div>
+          </article>
+
+          <article class="case card3d" data-tilt data-tilt-max="6">
+            <div class="case__num mono">P—03</div>
+            <div class="case__body">
+              <p class="mono case__tag">Healthcare Data · New Acquisition</p>
+              <h3>ePHI DLP Implementation</h3>
+              <ul class="ticks">
+                <li>Designed and implemented DLP policies protecting ePHI data.</li>
+                <li>Created custom Sensitive Information Types (SITs).</li>
+                <li>Applied sensitivity labels, detection logic and enforcement actions.</li>
+              </ul>
+            </div>
+            <div class="case__result"><span class="mono">Outcome</span><p><b>Compliance-ready</b> documentation and reporting for the acquired business.</p></div>
+          </article>
+        </div>
+
+        <div class="initiatives">
+          <h3 class="mono initiatives__title">// security initiatives &amp; automation</h3>
+          <div class="init-list">
+            <div class="init"><span class="mono">A1</span><b>Automated Ticket Formatter</b><p>Web tool that parses raw email details into formatted ticket templates, cutting manual entry time.</p></div>
+            <a class="init" href="https://github.com/Thondarock/bulk-reputation-checker" target="_blank" rel="noopener" data-cursor="Code"><span class="mono">A2</span><b>Bulk Reputation Checker ↗</b><p>Python CLI that bulk-checks IPs, domains and hashes on VirusTotal and exports a CSV report.</p></a>
+            <a class="init" href="https://github.com/Thondarock/threat-intel-email-news" target="_blank" rel="noopener" data-cursor="Code"><span class="mono">A3</span><b>AI Threat-Intel Brief ↗</b><p>Daily pipeline that pulls security news feeds, summarises risk, impact and mitigation with AI, and emails the team.</p></a>
+            <div class="init"><span class="mono">A4</span><b>Port Scan Reporting Template</b><p>Guided template that prompts for the right details and outputs a consistent port-scan incident report.</p></div>
+            <div class="init"><span class="mono">A5</span><b>Configuration &amp; Compliance Audits</b><p>Proactive audits of misconfigurations such as Android screenshot permissions and password policies, with step-by-step fixes.</p></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Korada Purna Sai. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- ============ LAB / GITHUB ============ -->
+    <section class="section lab" id="lab" data-stop="5" data-label="Lab">
+      <div class="lab__pin">
+        <div class="container lab__head">
+          <header class="sec-head">
+            <span class="sec-index mono">05</span>
+            <span class="sec-kicker mono">// github.com/Thondarock</span>
+          </header>
+          <div class="lab__headrow">
+            <h2 class="sec-title"><span class="split-words">The</span> <em class="serif grad-text split-words">lab</em><span class="split-words">: tools I build &amp; ship</span></h2>
+            <div class="lab__filters mono" role="tablist">
+              <button class="is-active" data-filter="all">All</button>
+              <button data-filter="sec">Security</button>
+              <button data-filter="app">Apps &amp; AI</button>
+            </div>
+          </div>
+        </div>
+        <div class="lab__viewport">
+          <div class="lab__track" id="labTrack"><!-- filled by js/projects.js --></div>
+        </div>
+        <div class="container lab__foot mono">
+          <span class="lab__hint">Drag · scroll · explore →</span>
+          <a href="https://github.com/Thondarock" target="_blank" rel="noopener" class="link-arrow" data-cursor="GitHub">All repositories <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- ============ SKILLS ============ -->
+    <section class="section skills" id="skills" data-stop="6" data-label="Skills">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">06</span>
+          <span class="sec-kicker mono">// arsenal</span>
+        </header>
+        <h2 class="sec-title"><span class="split-words">A defender's</span> <em class="serif grad-text split-words">arsenal</em></h2>
+
+        <div class="skills__grid">
+          <div class="sphere-wrap">
+            <div class="sphere" id="sphere" data-cursor="Drag"></div>
+            <span class="sphere-hint mono">drag to spin</span>
+          </div>
+          <div class="skillsets">
+            <div class="skillset card3d"><h4 class="mono">Cybersecurity</h4><p>Endpoint Security &amp; Compliance · Email &amp; Phishing Analysis · Incident Response &amp; RCA · SIEM Monitoring &amp; Rule Tuning</p></div>
+            <div class="skillset card3d"><h4 class="mono">Microsoft Security Cloud</h4><p>Sentinel · Defender XDR · Defender for Endpoint · Defender for Office 365 · Purview (DLP, SITs, Labels) · Intune · Entra ID · Logic Apps</p></div>
+            <div class="skillset card3d"><h4 class="mono">SOC Engineering &amp; Automation</h4><p>Logic Apps playbooks · Sentinel → Jira · Teams &amp; email notifications · Data connectors · Watchlists · SPF / DKIM / DMARC &amp; DNS · Identity &amp; IAM audits · Defender &amp; Intune policy reviews</p></div>
+            <div class="skillset card3d"><h4 class="mono">Tools</h4><p>SIEM · IDS/IPS · Firewalls · Kali Linux · Nmap · Metasploit · Wireshark · Burp Suite · Nessus · Git</p></div>
+            <div class="skillset card3d"><h4 class="mono">Web Security</h4><p>SQL Injection · Cross-Site Scripting · Web App Security Analysis · OWASP Top 10</p></div>
+            <div class="skillset card3d"><h4 class="mono">Code &amp; Platforms</h4><p>Python · KQL · HTML · CSS · JavaScript · React · Firebase · Linux (expert) · Windows (expert)</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CREDENTIALS ============ -->
+    <section class="section creds" id="credentials" data-stop="7" data-label="Credentials">
+      <div class="container">
+        <header class="sec-head">
+          <span class="sec-index mono">07</span>
+          <span class="sec-kicker mono">// verified</span>
+        </header>
+        <h2 class="sec-title"><span class="split-words">Certifications &amp;</span> <em class="serif grad-text split-words">education</em></h2>
+
+        <div class="badges">
+          <div class="badge badge--hero" tabindex="0">
+            <div class="badge__inner">
+              <div class="badge__front"><span class="mono">Microsoft</span><b>SC-200</b><small>Security Operations Analyst</small></div>
+              <div class="badge__back"><p>Investigating, searching and mitigating threats with Microsoft Sentinel, Defender for Cloud and Microsoft 365 Defender.</p><!-- TODO: put your Microsoft Learn credential URL in href; the link stays hidden while it is "#" --><a class="badge__verify mono" href="#" target="_blank" rel="noopener">Verify credential ↗</a></div>
+            </div>
+          </div>
+          <div class="badge" tabindex="0"><div class="badge__inner"><div class="badge__front"><span class="mono">AWS Academy</span><b>ML Foundations</b><small>Graduate</small></div><div class="badge__back"><p>AWS Academy Graduate: Machine Learning Foundations.</p></div></div></div>
+          <div class="badge" tabindex="0"><div class="badge__inner"><div class="badge__front"><span class="mono">Cyberthreya</span><b>Elite Mastery</b><small>Certification</small></div><div class="badge__back"><p>Advanced offensive &amp; defensive security program.</p></div></div></div>
+          <div class="badge" tabindex="0"><div class="badge__inner"><div class="badge__front"><span class="mono">Palo Alto</span><b>Cybersecurity</b><small>Internship</small></div><div class="badge__back"><p>Palo Alto Networks cybersecurity internship.</p></div></div></div>
+          <div class="badge" tabindex="0"><div class="badge__inner"><div class="badge__front"><span class="mono">NIKIST</span><b>Hacker Mentorship</b><small>Club Internship</small></div><div class="badge__back"><p>Hands-on mentorship in ethical hacking.</p></div></div></div>
+          <div class="badge" tabindex="0"><div class="badge__inner"><div class="badge__front"><span class="mono">IIDT</span><b>Cybersecurity</b><small>Internship</small></div><div class="badge__back"><p>IIDT cybersecurity internship program.</p></div></div></div>
+        </div>
+
+        <div class="edu">
+          <div class="edu__item">
+            <span class="edu__year mono">2024 — Jan 2027</span>
+            <div><h4>Master of Computer Applications (MCA)</h4><p>Andhra University · completing Jan 2027</p></div>
+            <span class="edu__score mono">~90%</span>
+          </div>
+          <div class="edu__item">
+            <span class="edu__year mono">2021 — 2024</span>
+            <div><h4>Bachelor of Computer Applications (BCA)</h4><p>Gayatri Vidya Parishad College for Degree &amp; P.G Courses (A)</p></div>
+            <span class="edu__score mono">70.0%</span>
+          </div>
+          <div class="edu__item">
+            <span class="edu__year mono">2019 — 2021</span>
+            <div><h4>Intermediate — MPC</h4><p>Sri Chaitanya Junior College</p></div>
+            <span class="edu__score mono">73.3%</span>
+          </div>
+        </div>
+
+        <div class="extra">
+          <div class="extra__item"><span class="mono">CTF</span><p>Capture The Flag challenges built around real-world attack scenarios.</p></div>
+          <div class="extra__item"><span class="mono">PENTEST</span><p>Hands-on exposure to penetration testing and internal network assessments.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact" data-stop="8" data-label="Contact">
+      <div class="container contact__inner">
+        <header class="sec-head sec-head--center">
+          <span class="sec-index mono">08</span>
+          <span class="sec-kicker mono">// open channel</span>
+        </header>
+        <h2 class="contact__title"><span class="split-words">Let's secure</span><br><em class="serif grad-text split-words">what matters.</em></h2>
+        <p class="contact__sub">Open to SOC Engineer and SOC Analyst roles in cybersecurity, remote or on-site, in any location. My inbox is always triaged.</p>
+
+        <div class="contact__actions">
+          <a href="mailto:siddhukorda756@gmail.com" class="mailbig magnetic" data-cursor="Email">
+            <svg><use href="#i-mail"/></svg><span>siddhukorda756@gmail.com</span>
+          </a>
+          <button class="btn btn--ghost btn--sm copy" data-copy="siddhukorda756@gmail.com" data-cursor="Copy"><svg><use href="#i-copy"/></svg><span>Copy</span></button>
+        </div>
+
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/purna-sai-korada-b6a634293/" target="_blank" rel="noopener" class="social magnetic" data-cursor="LinkedIn" aria-label="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
+          <a href="https://github.com/Thondarock" target="_blank" rel="noopener" class="social magnetic" data-cursor="GitHub" aria-label="GitHub"><svg><use href="#i-github"/></svg></a>
+          <a href="https://wa.link/tjywpp" target="_blank" rel="noopener" class="social magnetic" data-cursor="WhatsApp" aria-label="WhatsApp"><svg><use href="#i-whatsapp"/></svg></a>
+          <a href="https://x.com/Thonda420" target="_blank" rel="noopener" class="social magnetic" data-cursor="X" aria-label="X (Twitter)"><svg><use href="#i-x"/></svg></a>
+          <a href="https://www.instagram.com/tr__siddhu_" target="_blank" rel="noopener" class="social magnetic" data-cursor="Instagram" aria-label="Instagram"><svg><use href="#i-instagram"/></svg></a>
+        </div>
+        <a href="assets/Korada-Purna-Sai-Resume.pdf" download class="btn btn--glow magnetic" data-cursor="PDF">Download résumé <svg><use href="#i-down"/></svg></a>
+
+        <div class="hire card3d" id="hire">
+          <div class="hire__copy">
+            <p class="mono hire__k"><span class="status-dot"></span> Available for contract projects</p>
+            <h3>Need Microsoft Sentinel &amp; Defender <em class="serif grad-text">set up right?</em></h3>
+            <p>I take on paid, timeline-based projects to deploy and harden the Microsoft security stack, from first log to automated response.</p>
+            <ul class="hire__list mono">
+              <li>Sentinel workspace, data connectors &amp; log ingestion</li>
+              <li>Analytic rules, watchlists &amp; tuning</li>
+              <li>SOAR playbooks: Jira, Teams, email, auto-close</li>
+              <li>Defender XDR, Endpoint &amp; Office 365 policies</li>
+              <li>Intune compliance &amp; Purview DLP / labeling</li>
+              <li>SPF, DKIM &amp; DMARC email authentication</li>
+            </ul>
+          </div>
+          <div class="hire__cta">
+            <a href="https://wa.me/917780411816?text=Hi%20Purna%2C%20I%27d%20like%20to%20discuss%20a%20Microsoft%20Sentinel%20%2F%20Defender%20project." target="_blank" rel="noopener" class="btn btn--glow magnetic" data-cursor="Chat"><svg><use href="#i-whatsapp"/></svg> WhatsApp me</a>
+            <a href="mailto:siddhukorda756@gmail.com?subject=Sentinel%20%2F%20Defender%20contract%20project" class="btn btn--ghost magnetic" data-cursor="Email"><svg><use href="#i-mail"/></svg> Email a brief</a>
+            <small class="mono">Share scope, timeline &amp; budget, and I'll reply with a plan.</small>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer container mono">
+        <span>© <span id="year">2026</span> Korada Purna Sai</span>
+        <span class="footer__mid">Designed &amp; engineered with Three.js · GSAP</span>
+        <a href="#home" data-cursor="Top">Back to top ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ============ TERMINAL ============ -->
+  <button class="term-fab mono magnetic" id="termFab" data-cursor="Hack" aria-label="Open interactive terminal"><span>&gt;_</span> terminal <kbd>`</kbd></button>
+  <div class="term" id="term" role="dialog" aria-modal="true" aria-label="Interactive terminal" aria-hidden="true">
+    <div class="term__win">
+      <div class="term__bar mono"><i></i><i></i><i></i><span>kps@soc: ~</span><button class="term__x" id="termClose" aria-label="Close terminal">esc</button></div>
+      <div class="term__out mono" id="termOut"></div>
+      <form class="term__in mono" id="termForm" autocomplete="off"><span>kps@soc:~$</span><input id="termInput" spellcheck="false" aria-label="Command"></form>
+    </div>
+  </div>
+
+  <noscript><style>.loader{display:none}body.is-loading{overflow:auto}.split-chars,.reveal-fade{opacity:1!important;transform:none!important}</style></noscript>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
-
 </html>
